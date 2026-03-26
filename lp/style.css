@@ -343,6 +343,14 @@ input {
     pointer-events: none;
 }
 
+#heroVideo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
 .hero-video-container iframe {
     position: absolute;
     top: 0;
