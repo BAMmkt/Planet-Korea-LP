@@ -9,7 +9,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.planetkoreatravel.com/">
     <title>Planet Korea Travel | Turismo na Coreia do Sul</title>
-    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="img/logos/logo.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -25,35 +25,26 @@
             <span></span>
         </button>
 
-        <a href="#" class="logo">
-            <span class="logo-text"><span class="logo-tp">PK</span> Planet Korea Travel</span>
+        <a href="#hero" class="logo" aria-label="Planet Korea Travel">
+            <img src="img/logos/logo.png" alt="Planet Korea Travel" class="logo-img">
+            <span class="logo-text">Planet Korea Travel</span>
         </a>
 
         <nav class="header-nav">
-            <a href="#" class="header-nav-link">Sobre Nós</a>
-            <a href="#" class="header-nav-link">Nossos Tours</a>
-            <a href="#" class="header-nav-link">Brochuras</a>
-            <a href="#" class="header-nav-link">Para Agências</a>
-            <a href="#" class="header-nav-link">FAQ</a>
-            <a href="#" class="header-nav-link">Contato</a>
+            <a href="#trajetoria" class="header-nav-link">Sobre Nós</a>
+            <a href="#destinos" class="header-nav-link">Nossos Tours</a>
+            <a href="#parceiros" class="header-nav-link">Nossos Serviços</a>
+            <a href="#newsletter" class="header-nav-link">Contato</a>
         </nav>
-
-        <button class="search-btn" aria-label="Buscar">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="11" cy="11" r="8"/>
-                <path d="M21 21l-4.35-4.35"/>
-            </svg>
-        </button>
     </header>
 
     <!-- ===== MOBILE MENU ===== -->
     <nav class="mobile-menu" id="mobileMenu">
         <div class="mobile-menu-content">
-            <a href="#" class="mobile-menu-link">Nossos Tours</a>
-            <a href="#" class="mobile-menu-link">Nossos Serviços</a>
-            <a href="#" class="mobile-menu-link">Sobre Nós</a>
-            <a href="#" class="mobile-menu-link">Brochuras</a>
-            <a href="#" class="mobile-menu-link">Planeje sua Viagem</a>
+            <a href="#trajetoria" class="mobile-menu-link">Sobre Nós</a>
+            <a href="#destinos" class="mobile-menu-link">Nossos Tours</a>
+            <a href="#parceiros" class="mobile-menu-link">Nossos Serviços</a>
+            <a href="#newsletter" class="mobile-menu-link">Contato</a>
         </div>
     </nav>
 
@@ -90,90 +81,46 @@
 
                         <!-- Slide 0 — ☰ CÉU · GEON -->
                         <div class="viagens-slide active" data-index="0"
-                             data-img-main="img/namsan-tower.png"
-                             data-img-sec="img/gyeongbokgung.png">
+                             data-bg="img/gwae/backgrounds/ceu.jpg"
+                             data-overlay="rgba(0, 0, 0, 0.08)"
+                             data-img-main="img/tours/NamsanSeoulTower.jpg"
+                             data-img-sec="img/tours/DongdaemunDesignPlaza.jpg">
                             <span class="viagens-label">☰ &nbsp; CÉU · GEON</span>
                             <h2 class="viagens-heading">Altitude e<br><span class="gold-gradient">Contemplação</span></h2>
                             <p class="viagens-desc">Suba além do horizonte. A Coreia revela panoramas que tocam o infinito — de mirantes em cumes neblinosos a rooftops com vista para Seul iluminada. Uma curadoria para quem busca grandiosidade e leveza.</p>
-                            <div class="viagens-chips">
-                                <span class="viagens-chip">Panoramas</span>
-                                <span class="viagens-chip">Mirantes</span>
-                                <span class="viagens-chip">Sky Dining</span>
-                                <span class="viagens-chip">Exclusividade</span>
-                                <span class="viagens-chip">Contemplação</span>
-                            </div>
-                            <a href="#" class="btn-pill">
-                                Descobrir
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                                </svg>
-                            </a>
                         </div>
 
                         <!-- Slide 1 — ☷ TERRA · GON -->
                         <div class="viagens-slide" data-index="1"
-                             data-img-main="img/gyeongbokgung.png"
-                             data-img-sec="img/bukchon-hanok.png">
+                             data-bg="img/gwae/backgrounds/terra.jpg"
+                             data-overlay="rgba(0, 0, 0, 0.08)"
+                             data-img-main="img/tours/PalacioGyeongbokgung.jpg"
+                             data-img-sec="img/tours/BukchonHanokVillage.jpg">
                             <span class="viagens-label">☷ &nbsp; TERRA · GON</span>
                             <h2 class="viagens-heading">Raízes e<br><span class="gold-gradient">Tradição Viva</span></h2>
                             <p class="viagens-desc">Caminhe entre séculos. Vilas hanok preservadas, palácios imperiais e templos milenares revelam a alma profunda da Coreia. Uma conexão genuína com o território, a história e a cultura de um povo.</p>
-                            <div class="viagens-chips">
-                                <span class="viagens-chip">Templos</span>
-                                <span class="viagens-chip">Hanok</span>
-                                <span class="viagens-chip">Palácios</span>
-                                <span class="viagens-chip">Cultura</span>
-                                <span class="viagens-chip">História</span>
-                            </div>
-                            <a href="#" class="btn-pill">
-                                Explorar Cultura
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                                </svg>
-                            </a>
                         </div>
 
                         <!-- Slide 2 — ☲ FOGO · LI -->
                         <div class="viagens-slide" data-index="2"
-                             data-img-main="img/bukchon-hanok.png"
-                             data-img-sec="img/namsan-tower.png">
+                             data-bg="img/gwae/backgrounds/fogo.jpg"
+                             data-overlay="rgba(0, 0, 0, 0.08)"
+                             data-img-main="img/tours/Myeongdong.jpg"
+                             data-img-sec="img/tours/Insadong.jpg">
                             <span class="viagens-label">☲ &nbsp; FOGO · LI</span>
                             <h2 class="viagens-heading">Energia e<br><span class="gold-gradient">Intensidade Urbana</span></h2>
                             <p class="viagens-desc">Mergulhe no pulso vibrante de Seul. Das ruas de Hongdae aos espetáculos de K-Pop, das luzes de Gangnam ao street food de Gwangjang — a Coreia que não para nunca e seduz todos os sentidos.</p>
-                            <div class="viagens-chips">
-                                <span class="viagens-chip">K-Pop</span>
-                                <span class="viagens-chip">Gastronomia</span>
-                                <span class="viagens-chip">Festivais</span>
-                                <span class="viagens-chip">Vida Noturna</span>
-                                <span class="viagens-chip">Street Food</span>
-                            </div>
-                            <a href="#" class="btn-pill">
-                                Sentir a Energia
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                                </svg>
-                            </a>
                         </div>
 
                         <!-- Slide 3 — ☵ ÁGUA · GAM -->
                         <div class="viagens-slide" data-index="3"
-                             data-img-main="img/namsan-tower.png"
-                             data-img-sec="img/bukchon-hanok.png">
+                             data-bg="img/gwae/backgrounds/agua.jpg"
+                             data-overlay="rgba(0, 0, 0, 0.08)"
+                             data-img-main="img/tours/IlhaDeJeju.jpg"
+                             data-img-sec="img/tours/ParqueNacionalDeSeoraksan.jpg">
                             <span class="viagens-label">☵ &nbsp; ÁGUA · GAM</span>
                             <h2 class="viagens-heading">Serenidade e<br><span class="gold-gradient">Fluidez Natural</span></h2>
                             <p class="viagens-desc">Deixe-se levar pela Coreia contemplativa. Costas limpas de Jeju, rios que espelham montanhas, spas tradicionais e trilhas de silêncio — um equilíbrio entre o mundo exterior e o interior.</p>
-                            <div class="viagens-chips">
-                                <span class="viagens-chip">Costa</span>
-                                <span class="viagens-chip">Jeju</span>
-                                <span class="viagens-chip">Bem-estar</span>
-                                <span class="viagens-chip">Natureza</span>
-                                <span class="viagens-chip">Serenidade</span>
-                            </div>
-                            <a href="#" class="btn-pill">
-                                Encontrar Equilíbrio
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                                </svg>
-                            </a>
                         </div>
 
                     </div><!-- /viagens-slides-wrap -->
@@ -183,10 +130,10 @@
                 <!-- IMAGE COLUMN -->
                 <div class="viagens-img-col" id="viagensImgCol">
                     <div class="viagens-img-main" id="viagensImgMain">
-                        <div class="viagens-img-inner" id="viagensImgMainInner" style="background-image: url('img/namsan-tower.png')"></div>
+                        <div class="viagens-img-inner" id="viagensImgMainInner" style="background-image: url('img/tours/NamsanSeoulTower.jpg')"></div>
                     </div>
                     <div class="viagens-img-sec" id="viagensImgSec">
-                        <div class="viagens-img-inner" id="viagensImgSecInner" style="background-image: url('img/gyeongbokgung.png')"></div>
+                        <div class="viagens-img-inner" id="viagensImgSecInner" style="background-image: url('img/tours/DongdaemunDesignPlaza.jpg')"></div>
                     </div>
                 </div>
 
@@ -215,91 +162,99 @@
         <section class="section destinos-carousel" id="destinos">
             <div class="destinos-carousel-slides" id="destinosCarousel">
                 <!-- 1. Namsan Seoul Tower -->
-                <div class="destinos-carousel-slide active" data-bg="img/namsan-tower.png">
-                    <div class="destinos-carousel-slide-bg" style="background-image: url('img/namsan-tower.png')"></div>
+                <div class="destinos-carousel-slide active" data-bg="img/tours/NamsanSeoulTower.jpg">
+                    <div class="destinos-carousel-slide-bg" style="background-image: url('img/tours/NamsanSeoulTower.jpg')"></div>
                     <div class="destinos-carousel-slide-overlay"></div>
                     <div class="destinos-carousel-slide-content">
                         <span class="destinos-carousel-label">Nossos Tours</span>
                         <h2 class="destinos-carousel-title">Namsan Seoul Tower</h2>
                         <span class="destinos-carousel-location">Seul</span>
                         <p class="destinos-carousel-desc">Suba ao topo da icônica torre de Seul e contemple uma vista panorâmica de 360° da capital sul-coreana. Um ponto imperdível ao pôr do sol.</p>
+                        <a href="#newsletter" class="btn-pill btn-destinos-carousel">Agende sua viagem <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                     </div>
                 </div>
                 <!-- 2. Palácio Gyeongbokgung -->
-                <div class="destinos-carousel-slide" data-bg="img/gyeongbokgung.png">
-                    <div class="destinos-carousel-slide-bg" style="background-image: url('img/gyeongbokgung.png')"></div>
+                <div class="destinos-carousel-slide" data-bg="img/tours/PalacioGyeongbokgung.jpg">
+                    <div class="destinos-carousel-slide-bg" style="background-image: url('img/tours/PalacioGyeongbokgung.jpg')"></div>
                     <div class="destinos-carousel-slide-overlay"></div>
                     <div class="destinos-carousel-slide-content">
                         <span class="destinos-carousel-label">Nossos Tours</span>
                         <h2 class="destinos-carousel-title">Palácio Gyeongbokgung</h2>
                         <span class="destinos-carousel-location">Seul</span>
                         <p class="destinos-carousel-desc">O maior e mais majestoso dos cinco grandes palácios da dinastia Joseon. Explore mais de 600 anos de história e arquitetura real coreana.</p>
+                        <a href="#newsletter" class="btn-pill btn-destinos-carousel">Agende sua viagem <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                     </div>
                 </div>
                 <!-- 3. Parque Nacional de Seoraksan -->
-                <div class="destinos-carousel-slide" data-bg="img/bukchon-hanok.png">
-                    <div class="destinos-carousel-slide-bg" style="background-image: url('img/bukchon-hanok.png')"></div>
+                <div class="destinos-carousel-slide" data-bg="img/tours/ParqueNacionalDeSeoraksan.jpg">
+                    <div class="destinos-carousel-slide-bg" style="background-image: url('img/tours/ParqueNacionalDeSeoraksan.jpg')"></div>
                     <div class="destinos-carousel-slide-overlay"></div>
                     <div class="destinos-carousel-slide-content">
                         <span class="destinos-carousel-label">Nossos Tours</span>
                         <h2 class="destinos-carousel-title">Parque Nacional de Seoraksan</h2>
                         <span class="destinos-carousel-location">Sokcho</span>
                         <p class="destinos-carousel-desc">Trilhas deslumbrantes entre picos rochosos, templos budistas e paisagens que mudam a cada estação. A natureza coreana em seu estado mais puro.</p>
+                        <a href="#newsletter" class="btn-pill btn-destinos-carousel">Agende sua viagem <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                     </div>
                 </div>
                 <!-- 4. Insadong -->
-                <div class="destinos-carousel-slide" data-bg="img/masai-mara.jpg">
-                    <div class="destinos-carousel-slide-bg" style="background-image: url('img/masai-mara.jpg')"></div>
+                <div class="destinos-carousel-slide" data-bg="img/tours/Insadong.jpg">
+                    <div class="destinos-carousel-slide-bg" style="background-image: url('img/tours/Insadong.jpg')"></div>
                     <div class="destinos-carousel-slide-overlay"></div>
                     <div class="destinos-carousel-slide-content">
                         <span class="destinos-carousel-label">Nossos Tours</span>
                         <h2 class="destinos-carousel-title">Insadong</h2>
                         <span class="destinos-carousel-location">Seul</span>
                         <p class="destinos-carousel-desc">O coração cultural de Seul. Galerias de arte, casas de chá tradicionais, artesanato e uma atmosfera que mistura o antigo e o moderno.</p>
+                        <a href="#newsletter" class="btn-pill btn-destinos-carousel">Agende sua viagem <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                     </div>
                 </div>
                 <!-- 5. Bukchon Hanok Village -->
-                <div class="destinos-carousel-slide" data-bg="img/bukchon-hanok.png">
-                    <div class="destinos-carousel-slide-bg" style="background-image: url('img/bukchon-hanok.png')"></div>
+                <div class="destinos-carousel-slide" data-bg="img/tours/BukchonHanokVillage.jpg">
+                    <div class="destinos-carousel-slide-bg" style="background-image: url('img/tours/BukchonHanokVillage.jpg')"></div>
                     <div class="destinos-carousel-slide-overlay"></div>
                     <div class="destinos-carousel-slide-content">
                         <span class="destinos-carousel-label">Nossos Tours</span>
                         <h2 class="destinos-carousel-title">Bukchon Hanok Village</h2>
                         <span class="destinos-carousel-location">Seul</span>
                         <p class="destinos-carousel-desc">Caminhe pelas ruelas centenárias repletas de casas tradicionais coreanas. Um recanto de tranquilidade entre os palácios e a modernidade de Seul.</p>
+                        <a href="#newsletter" class="btn-pill btn-destinos-carousel">Agende sua viagem <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                     </div>
                 </div>
                 <!-- 6. Dongdaemun Design Plaza -->
-                <div class="destinos-carousel-slide" data-bg="img/gyeongbokgung.png">
-                    <div class="destinos-carousel-slide-bg" style="background-image: url('img/gyeongbokgung.png')"></div>
+                <div class="destinos-carousel-slide" data-bg="img/tours/DongdaemunDesignPlaza.jpg">
+                    <div class="destinos-carousel-slide-bg" style="background-image: url('img/tours/DongdaemunDesignPlaza.jpg')"></div>
                     <div class="destinos-carousel-slide-overlay"></div>
                     <div class="destinos-carousel-slide-content">
                         <span class="destinos-carousel-label">Nossos Tours</span>
                         <h2 class="destinos-carousel-title">Dongdaemun Design Plaza</h2>
                         <span class="destinos-carousel-location">Seul</span>
                         <p class="destinos-carousel-desc">Um marco da arquitetura futurista projetado por Zaha Hadid. Design, moda, tecnologia e cultura convergem neste espaço icônico de Seul.</p>
+                        <a href="#newsletter" class="btn-pill btn-destinos-carousel">Agende sua viagem <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                     </div>
                 </div>
                 <!-- 7. Ilha de Jeju -->
-                <div class="destinos-carousel-slide" data-bg="img/namsan-tower.png">
-                    <div class="destinos-carousel-slide-bg" style="background-image: url('img/namsan-tower.png')"></div>
+                <div class="destinos-carousel-slide" data-bg="img/tours/IlhaDeJeju.jpg">
+                    <div class="destinos-carousel-slide-bg" style="background-image: url('img/tours/IlhaDeJeju.jpg')"></div>
                     <div class="destinos-carousel-slide-overlay"></div>
                     <div class="destinos-carousel-slide-content">
                         <span class="destinos-carousel-label">Nossos Tours</span>
                         <h2 class="destinos-carousel-title">Ilha de Jeju</h2>
                         <span class="destinos-carousel-location">Jeju</span>
                         <p class="destinos-carousel-desc">Patrimônio Natural da UNESCO. Vulcões, praias, cachoeiras e uma cultura única. A ilha paradisíaca da Coreia do Sul que encanta todos os sentidos.</p>
+                        <a href="#newsletter" class="btn-pill btn-destinos-carousel">Agende sua viagem <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                     </div>
                 </div>
                 <!-- 8. Myeongdong -->
-                <div class="destinos-carousel-slide" data-bg="img/masai-mara.jpg">
-                    <div class="destinos-carousel-slide-bg" style="background-image: url('img/masai-mara.jpg')"></div>
+                <div class="destinos-carousel-slide" data-bg="img/tours/Myeongdong.jpg">
+                    <div class="destinos-carousel-slide-bg" style="background-image: url('img/tours/Myeongdong.jpg')"></div>
                     <div class="destinos-carousel-slide-overlay"></div>
                     <div class="destinos-carousel-slide-content">
                         <span class="destinos-carousel-label">Nossos Tours</span>
                         <h2 class="destinos-carousel-title">Myeongdong</h2>
                         <span class="destinos-carousel-location">Seul</span>
                         <p class="destinos-carousel-desc">O distrito de compras mais vibrante de Seul. K-beauty, street food irresistível e uma energia contagiante a cada esquina.</p>
+                        <a href="#newsletter" class="btn-pill btn-destinos-carousel">Agende sua viagem <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                     </div>
                 </div>
             </div>
@@ -322,26 +277,43 @@
 
         <!-- ===== SECTION 4: SOBRE NÓS ===== -->
         <section class="section trajetoria" id="trajetoria">
-            <div class="trajetoria-bg" style="background-image: url('img/namsan-tower.png')"></div>
+            <div class="trajetoria-bg" style="background-image: url('img/background/SobreNos.jpg')"></div>
             <div class="trajetoria-overlay"></div>
             <div class="trajetoria-content">
-                <h2 class="trajetoria-title">Descubra a Coreia do Seu Jeito<br>com a Planet Korea Travel</h2>
-                <p class="trajetoria-text">A Planet Korea Travel conecta o Brasil à Coreia do Sul com experiências autênticas, seguras e personalizadas. Seja você um viajante solo ou uma agência de turismo, nós criamos roteiros sob medida para explorar cada canto da Coreia — do palácio mais tradicional às ilhas mais escondidas.</p>
+                <div class="trajetoria-intro">
+                    <span class="trajetoria-kicker">Sobre Nós</span>
+                    <h2 class="trajetoria-title">Seu porto seguro na Coreia do Sul</h2>
+                    <p class="trajetoria-text">A Planet Korea Travel é uma agência e operadora de turismo sediada na Coreia do Sul, especializada em atender brasileiros, viajantes solo ou agências, com roteiros que unem profundidade cultural, conforto e exclusividade. Nossa fundadora é brasileira, tem ampla vivência na Coreia e no turismo internacional, e lidera um time multicultural que conhece o país para além dos cartões-postais.</p>
+                </div>
+
+                <div class="trajetoria-grid">
+                    <article class="trajetoria-card">
+                        <h3 class="trajetoria-card-title">Quem Somos</h3>
+                        <p class="trajetoria-card-text">Conhecemos cada detalhe da Coreia do Sul: das rotas mais tradicionais às experiências que só quem vive aqui pode oferecer. Nosso diferencial está no cuidado. Cada roteiro é feito sob medida, com atenção ao perfil, aos interesses e às necessidades de cada viajante.</p>
+                        <p class="trajetoria-card-text">Todos os nossos serviços, dos roteiros aos guias e ao atendimento, são oferecidos em português, garantindo fluidez e segurança durante toda a viagem. Seja para descobrir a Coreia pela primeira vez ou para aprofundar sua conexão com o país, estamos aqui para acompanhar cada passo da jornada.</p>
+                    </article>
+
+                    <article class="trajetoria-card trajetoria-card-featured">
+                        <span class="trajetoria-card-label">Nossa História</span>
+                        <h3 class="trajetoria-card-title">Roberta, fundadora</h3>
+                        <div class="trajetoria-founder-photo-wrap">
+                            <img src="img/about/roberta.avif" alt="Roberta, fundadora da Planet Korea Travel" class="trajetoria-founder-photo">
+                        </div>
+                        <p class="trajetoria-card-text">Meu nome é Roberta, sou fundadora da Planet Korea Travel, e há mais de 10 anos escolhi chamar a Coreia do Sul de casa. Sou fotógrafa, mãe, apaixonada por cultura e casada com um coreano. Ao longo dos anos, viajei intensamente por todo o território coreano, descobrindo templos escondidos, cidades vibrantes, histórias silenciosas e tradições que transformam.</p>
+                        <p class="trajetoria-card-text">Foi aí que percebi que essa vivência precisava virar ponte. Nasceu então o desejo de criar uma agência diferente, onde cada viagem fosse construída com o mesmo cuidado com que se revela uma imagem: falando português, pensando nos detalhes e respeitando o tempo e o sonho de cada pessoa.</p>
+                        <p class="trajetoria-card-text">Hoje, com uma equipe multicultural e apaixonada pelo que faz, tenho orgulho de transformar vivências em experiências, conectando o Brasil à Coreia com autenticidade, excelência e alma.</p>
+                    </article>
+                </div>
+
                 <div class="trajetoria-links">
-                    <a href="#" class="btn-pill">
+                    <a href="#destinos" class="btn-pill">
                         NOSSOS TOURS
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M5 12h14M12 5l7 7-7 7"/>
                         </svg>
                     </a>
-                    <a href="#" class="btn-pill">
-                        SOBRE NÓS
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </a>
-                    <a href="#" class="btn-pill">
-                        BAIXAR CATÁLOGO
+                    <a href="#newsletter" class="btn-pill">
+                        FALE CONOSCO
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M5 12h14M12 5l7 7-7 7"/>
                         </svg>
@@ -352,78 +324,82 @@
 
         <!-- ===== SECTION 5: NOSSOS SERVIÇOS ===== -->
         <section class="section parceiros" id="parceiros">
-            <div class="parceiros-bg" style="background-image: url('img/bukchon-hanok.png')"></div>
+            <div class="parceiros-bg" style="background-image: url('img/background/NossosServicos.jpg')"></div>
             <div class="parceiros-overlay"></div>
             <div class="parceiros-content">
                 <div class="parceiros-slider" id="parceirosSlider">
                     <div class="parceiro-slide active">
-                        <h3>Consultoria de Viagem</h3>
-                        <p>Planejamos cada detalhe da sua viagem à Coreia do Sul. Do primeiro contato ao retorno, oferecemos orientação especializada para que sua experiência seja perfeita.</p>
-                        <a href="#" class="btn-pill">
-                            SAIBA MAIS
+                        <span class="parceiro-eyebrow">Nossos Serviços</span>
+                        <h3>Para Viajantes</h3>
+
+                        <div class="parceiro-block">
+                            <h4 class="parceiro-subtitle">Roteiros Personalizados</h4>
+                            <p>Uma viagem feita para você e com você. Cada roteiro é uma construção conjunta, baseada no seu estilo, tempo, interesses e desejos, com atendimento em português e apoio completo durante toda a jornada.</p>
+                            <ul class="parceiro-list">
+                                <li>Hospedagens com seu estilo</li>
+                                <li>Transporte e deslocamentos otimizados</li>
+                                <li>Experiências culturais autênticas</li>
+                                <li>Gastronomia, templos, K-pop, natureza e muito mais</li>
+                                <li>Guias locais e atendimento em português</li>
+                            </ul>
+                            <p class="parceiro-note">Essa é a sua Coreia, do seu jeito, com a nossa expertise.</p>
+                        </div>
+
+                        <div class="parceiro-block">
+                            <h4 class="parceiro-subtitle">Tours Temáticos</h4>
+                            <p>A Planet Korea Travel leva você à Coreia em profundidade, guiada pelos seus interesses, com conforto, curadoria e sofisticação.</p>
+                            <ul class="parceiro-list parceiro-list-inline">
+                                <li>Espiritualidade e bem-estar</li>
+                                <li>Arquitetura e história viva</li>
+                                <li>Skincare, estética e dermatologia</li>
+                                <li>Business e conexões profissionais</li>
+                                <li>Luxo com propósito: premium, privativo, executivo e concierge</li>
+                            </ul>
+                            <p class="parceiro-note">Todos os tours contam com suporte em português, curadoria especializada e estrutura de alto padrão.</p>
+                        </div>
+
+                        <a href="#newsletter" class="btn-pill">
+                            PLANEJAR MINHA VIAGEM
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M5 12h14M12 5l7 7-7 7"/>
                             </svg>
                         </a>
                     </div>
+
                     <div class="parceiro-slide">
-                        <h3>Roteiros Personalizados</h3>
-                        <p>Criamos itinerários sob medida para cada perfil de viajante. De templos milenares a arranha-céus futuristas, montamos a viagem perfeita para você.</p>
-                        <a href="#" class="btn-pill">
-                            SAIBA MAIS
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M5 12h14M12 5l7 7-7 7"/>
-                            </svg>
-                        </a>
-                    </div>
-                    <div class="parceiro-slide">
-                        <h3>Suporte no Destino</h3>
-                        <p>Conte com suporte completo durante toda a sua estadia na Coreia do Sul. Assistência 24h, transfers e acompanhamento em português.</p>
-                        <a href="#" class="btn-pill">
-                            SAIBA MAIS
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M5 12h14M12 5l7 7-7 7"/>
-                            </svg>
-                        </a>
-                    </div>
-                    <div class="parceiro-slide">
-                        <h3>Guia em Português</h3>
-                        <p>Explore a Coreia do Sul com total conforto linguístico. Nossos guias brasileiros e fluentes em português garantem que você aproveite cada momento sem barreiras.</p>
-                        <a href="#" class="btn-pill">
-                            SAIBA MAIS
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M5 12h14M12 5l7 7-7 7"/>
-                            </svg>
-                        </a>
-                    </div>
-                    <div class="parceiro-slide">
-                        <h3>Traslado e Reservas</h3>
-                        <p>Organizamos todos os seus traslados, reservas em hotéis, restaurantes e experiências. Tudo planejado para que você só se preocupe em aproveitar.</p>
-                        <a href="#" class="btn-pill">
-                            SAIBA MAIS
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M5 12h14M12 5l7 7-7 7"/>
-                            </svg>
-                        </a>
-                    </div>
-                    <div class="parceiro-slide">
-                        <h3>Para Agências Parceiras</h3>
-                        <p>Conheça todos os serviços oferecidos para agências parceiras. Receptivo na Coreia do Sul, roteiros white-label, suporte operacional e condições especiais para grupos.</p>
-                        <a href="#" class="btn-pill">
-                            PARA AGÊNCIAS
+                        <span class="parceiro-eyebrow">Nossos Serviços</span>
+                        <h3>Para Agências</h3>
+
+                        <div class="parceiro-block">
+                            <p>Atendemos agências brasileiras com estrutura completa na Coreia do Sul, combinando operação eficiente com experiências culturais e de luxo.</p>
+                            <ul class="parceiro-list">
+                                <li>Logística completa</li>
+                                <li>Guias bilíngues</li>
+                                <li>Concierge</li>
+                                <li>Experiências de luxo e culturais</li>
+                                <li>Atendimento em português</li>
+                                <li>Materiais de apoio</li>
+                                <li>Curadoria e roteiros exclusivos</li>
+                            </ul>
+                            <p class="parceiro-note">Em 2024, participamos da WTM Latin America em São Paulo como os únicos representantes da Coreia do Sul, reforçando nosso papel de referência para o mercado brasileiro.</p>
+                        </div>
+
+                        <a href="#newsletter" class="btn-pill">
+                            PARCERIA PARA AGÊNCIAS
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M5 12h14M12 5l7 7-7 7"/>
                             </svg>
                         </a>
                     </div>
                 </div>
+
                 <div class="parceiros-nav">
-                    <button class="parceiros-arrow prev" id="parceiroPrev">
+                    <button class="parceiros-arrow prev" id="parceiroPrev" aria-label="Versão anterior">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M19 12H5M12 5l-7 7 7 7"/>
                         </svg>
                     </button>
-                    <button class="parceiros-arrow next" id="parceiroNext">
+                    <button class="parceiros-arrow next" id="parceiroNext" aria-label="Próxima versão">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M5 12h14M12 5l7 7-7 7"/>
                         </svg>
@@ -435,20 +411,28 @@
 
         <!-- ===== SECTION 6: NEWSLETTER + CATÁLOGO ===== -->
         <section class="section newsletter" id="newsletter">
-            <div class="newsletter-bg" style="background-image: url('img/gyeongbokgung.png')"></div>
+            <div class="newsletter-bg" style="background-image: url('img/background/Contato.jpg')"></div>
             <div class="newsletter-overlay"></div>
             <div class="newsletter-content">
                 <h2 class="newsletter-title">Receba notícias e<br>ofertas exclusivas</h2>
                 <p class="newsletter-text">Inscreva-se em nossa newsletter e receba todo nosso conteúdo em primeira mão. Dicas de viagem, promoções e novidades sobre a Coreia do Sul.</p>
                 <form class="newsletter-form" id="newsletterForm">
-                    <div class="form-group">
-                        <input type="text" placeholder="Nome" required>
+                    <div class="newsletter-form-grid">
+                        <div class="form-group">
+                            <input type="text" placeholder="Nome" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="E-mail" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" placeholder="Telefone">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="CPF/CNPJ">
+                        </div>
                     </div>
                     <div class="form-group">
-                        <input type="email" placeholder="E-mail" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="tel" placeholder="Telefone">
+                        <textarea placeholder="O que você busca?" rows="4"></textarea>
                     </div>
                     <div class="form-check">
                         <input type="checkbox" id="aceito" required>

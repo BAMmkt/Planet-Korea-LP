@@ -54,6 +54,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
 
+    // Defensive reset in case a previous state left page scroll locked.
+    document.body.style.overflow = '';
+    if (hamburger) hamburger.classList.remove('active');
+    if (mobileMenu) mobileMenu.classList.remove('active');
+
     hamburger.addEventListener('click', () => {
         hamburger.classList.toggle('active');
         mobileMenu.classList.toggle('active');
@@ -75,6 +80,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const parceiroNext = document.getElementById('parceiroNext');
     const parceiroDots = document.getElementById('parceiroDots');
     let currentParceiro = 0;
+
+    // Fix slider height: measure all slides so switching never causes layout shift
+    function setParceirosSliderHeight() {
+        const slider = document.getElementById('parceirosSlider');
+        if (!slider || parceiroSlides.length === 0) return;
+        parceiroSlides.forEach(slide => {
+            slide.style.position = 'relative';
+            slide.style.visibility = 'hidden';
+            slide.style.opacity = '0';
+        });
+        let maxH = 0;
+        parceiroSlides.forEach(slide => {
+            if (slide.offsetHeight > maxH) maxH = slide.offsetHeight;
+        });
+        parceiroSlides.forEach(slide => {
+            slide.style.position = '';
+            slide.style.visibility = '';
+            slide.style.opacity = '';
+        });
+        if (maxH > 0) slider.style.minHeight = maxH + 'px';
+    }
+    setParceirosSliderHeight();
+    window.addEventListener('resize', setParceirosSliderHeight);
 
     // Create dots
     if (parceiroSlides.length > 0 && parceiroDots) {
@@ -154,37 +182,42 @@ document.addEventListener('DOMContentLoaded', () => {
     const viagensCounter = document.getElementById('viagensCounter');
     const viagensPrevBtn = document.getElementById('viagensPrev');
     const viagensNextBtn = document.getElementById('viagensNext');
+    const viagensSection = document.getElementById('viagens');
     const viagensImgMainInner = document.getElementById('viagensImgMainInner');
     const viagensImgSecInner = document.getElementById('viagensImgSecInner');
     let currentViagens = 0;
     let viagensTimer;
 
-    function showViagenSlide(index) {
+    function showViagenSlide(index, instant = false) {
         const total = viagensSlideItems.length;
         if (total === 0) return;
         index = ((index % total) + total) % total;
 
         const nextSlide = viagensSlideItems[index];
+        const bgImage = nextSlide.dataset.bg;
+        const overlayTint = nextSlide.dataset.overlay;
         const imgMain = nextSlide.dataset.imgMain;
         const imgSec = nextSlide.dataset.imgSec;
 
         viagensSlideItems.forEach(s => s.classList.remove('active'));
         nextSlide.classList.add('active');
 
+        if (viagensSection && bgImage) {
+            viagensSection.style.setProperty('--viagens-bg-image', `url('${bgImage}')`);
+        }
+
+        if (viagensSection && overlayTint) {
+            viagensSection.style.setProperty('--viagens-overlay-tint', overlayTint);
+        }
+
         if (viagensImgMainInner && imgMain) {
-            viagensImgMainInner.classList.add('fading');
-            setTimeout(() => {
-                viagensImgMainInner.style.backgroundImage = `url('${imgMain}')`;
-                viagensImgMainInner.classList.remove('fading');
-            }, 500);
+            viagensImgMainInner.classList.remove('fading');
+            viagensImgMainInner.style.backgroundImage = `url('${imgMain}')`;
         }
 
         if (viagensImgSecInner && imgSec) {
-            viagensImgSecInner.classList.add('fading');
-            setTimeout(() => {
-                viagensImgSecInner.style.backgroundImage = `url('${imgSec}')`;
-                viagensImgSecInner.classList.remove('fading');
-            }, 500);
+            viagensImgSecInner.classList.remove('fading');
+            viagensImgSecInner.style.backgroundImage = `url('${imgSec}')`;
         }
 
         if (viagensCounter) {
@@ -216,6 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (viagensSlideItems.length > 0) {
+        showViagenSlide(currentViagens, true);
         startViagensTimer();
     }
 
@@ -316,23 +350,59 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===== SMOOTH SCROLL FOR ANCHOR LINKS =====
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                e.preventDefault();
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
+            const href = this.getAttribute('href');
+            if (!href || href === '#') return;
+
+            const target = document.querySelector(href);
+            if (!target) return;
+
+            e.preventDefault();
+            const top = target.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({
+                top,
+                behavior: 'smooth'
+            });
         });
     });
 
+    // ===== PAUSE CAROUSELS WHEN NOT VISIBLE =====
+    const destinosCarouselSection = document.getElementById('destinos');
+    if (destinosCarouselSection && destinosSlides.length > 0) {
+        const destinosVisibilityObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    restartDestinosTimer();
+                } else {
+                    clearInterval(destinosInterval);
+                }
+            });
+        }, { threshold: 0.1 });
+        destinosVisibilityObserver.observe(destinosCarouselSection);
+    }
+
+    const viagensCarouselSection = document.getElementById('viagens');
+    if (viagensCarouselSection && viagensSlideItems.length > 0) {
+        const viagensVisibilityObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    startViagensTimer();
+                } else {
+                    clearInterval(viagensTimer);
+                }
+            });
+        }, { threshold: 0.1 });
+        viagensVisibilityObserver.observe(viagensCarouselSection);
+    }
+
     // ===== PARALLAX EFFECT ON BACKGROUNDS =====
     window.addEventListener('scroll', () => {
-        const scrollY = window.scrollY;
         const sections = document.querySelectorAll('.section');
 
         sections.forEach(section => {
+            // Skip destinos carousel — its bg elements have Ken Burns scale()
+            // that conflicts with translateY causing flicker
+            if (section.id === 'destinos') return;
+
             const bg = section.querySelector('[class$="-bg"]');
             if (bg) {
                 const rect = section.getBoundingClientRect();
@@ -354,59 +424,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ===== FULL-PAGE SCROLL SNAPPING =====
-    (function () {
-        const snapTargets = [
-            ...document.querySelectorAll('main > .section'),
-            document.querySelector('.footer')
-        ].filter(Boolean);
-
-        if (snapTargets.length === 0) return;
-
-        let cooldown = false;
-        const COOLDOWN_MS = 950;
-
-        function getActiveIndex() {
-            let nearest = 0;
-            let minDist = Infinity;
-            snapTargets.forEach((el, i) => {
-                const dist = Math.abs(el.getBoundingClientRect().top);
-                if (dist < minDist) { minDist = dist; nearest = i; }
-            });
-            return nearest;
-        }
-
-        function goTo(index) {
-            if (index < 0 || index >= snapTargets.length) return;
-            cooldown = true;
-            snapTargets[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
-            setTimeout(() => { cooldown = false; }, COOLDOWN_MS);
-        }
-
-        // Wheel
-        window.addEventListener('wheel', function (e) {
-            // Let horizontal card-slider work normally
-            if (e.target.closest('.destinos-cards-wrapper')) return;
-            if (cooldown) { e.preventDefault(); return; }
-            e.preventDefault();
-            const idx = getActiveIndex();
-            if (e.deltaY > 0) goTo(idx + 1);
-            else if (e.deltaY < 0) goTo(idx - 1);
-        }, { passive: false });
-
-        // Touch swipe
-        let touchStartY = 0;
-        window.addEventListener('touchstart', function (e) {
-            touchStartY = e.touches[0].clientY;
-        }, { passive: true });
-
-        window.addEventListener('touchend', function (e) {
-            if (cooldown) return;
-            const delta = touchStartY - e.changedTouches[0].clientY;
-            if (Math.abs(delta) < 60) return; // ignore accidental taps
-            const idx = getActiveIndex();
-            if (delta > 0) goTo(idx + 1);
-            else goTo(idx - 1);
-        }, { passive: true });
-    })();
+    // Full-page section snap removed: page now scrolls naturally.
 });

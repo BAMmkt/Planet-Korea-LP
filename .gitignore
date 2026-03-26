@@ -8,3 +8,7 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Firebase
+.firebase/
+.firebaserc.local
