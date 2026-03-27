@@ -532,5 +532,31 @@
     </a>
 
     <script src="script.js"></script>
+    <script>
+    (function(){
+      var API='https://southamerica-east1-projeto3-lr5vjl.cloudfunctions.net/trackingCapture';
+      var UID='QztZoWfV5UUSzOqDYdjlx4YocY43';
+      var AID='B7jpmkKzGA4lTDQwAf5b';
+      function sendLead(form){
+        var data={};
+        var inputs=form.querySelectorAll('input,textarea,select');
+        for(var i=0;i<inputs.length;i++){
+          var el=inputs[i];
+          var key=el.name||el.id||el.placeholder||('campo_'+i);
+          if(el.value) data[key]=el.value;
+        }
+        var xhr=new XMLHttpRequest();
+        xhr.open('POST',API,true);
+        xhr.setRequestHeader('Content-Type','application/json');
+        xhr.send(JSON.stringify({userId:UID,accountId:AID,data:data}));
+      }
+      document.addEventListener('submit',function(e){
+        var form=e.target;
+        if(form&&form.tagName==='FORM'){
+          sendLead(form);
+        }
+      },true);
+    })();
+    </script>
 </body>
 </html>
