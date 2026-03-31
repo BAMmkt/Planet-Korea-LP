@@ -1,5 +1,3 @@
-/* ===== TERESA PEREZ — INTERACTIONS ===== */
-
 // ===== HERO VIDEO — YouTube clip loop (4:20–5:20) =====
 (function () {
     const HERO_VIDEO_ID = 'AA-sv3ilNBE';
@@ -52,6 +50,8 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     // ===== HERO SLIDER =====
+
+
     const heroSlides = document.querySelectorAll('.hero-slide');
     const indicators = document.querySelectorAll('.indicator');
     let currentHeroSlide = 0;
@@ -98,6 +98,15 @@ document.addEventListener('DOMContentLoaded', () => {
             header.classList.remove('scrolled');
             if (topBar) topBar.style.transform = 'translateY(0)';
         }
+    });
+
+    // ===== FOOTER TOUR LINKS → GOTO SLIDE =====
+    document.querySelectorAll('[data-goto-slide]').forEach(link => {
+        link.addEventListener('click', e => {
+            const index = parseInt(link.getAttribute('data-goto-slide'), 10);
+            // Wait for scroll to reach #destinos, then switch slide
+            setTimeout(() => showViagenSlide(index), 400);
+        });
     });
 
     // ===== HAMBURGER MENU =====
@@ -232,11 +241,204 @@ document.addEventListener('DOMContentLoaded', () => {
     const viagensCounter = document.getElementById('viagensCounter');
     const viagensPrevBtn = document.getElementById('viagensPrev');
     const viagensNextBtn = document.getElementById('viagensNext');
-    const viagensSection = document.getElementById('viagens');
-    const viagensImgMainInner = document.getElementById('viagensImgMainInner');
-    const viagensImgSecInner = document.getElementById('viagensImgSecInner');
+    const viagensSection = document.getElementById('destinos');
     let currentViagens = 0;
     let viagensTimer;
+
+    // ===== TOURS DATA — fonte central de dados =====
+    // Para atualizar conteúdo ou imagens, edite apenas este array.
+    const toursData = [
+        // 0 — TERRA
+        {
+            elementKey:      'terra',
+            elementLabel:    'TERRA',
+            elementTitle:    'Raízes e Tradição',
+            tourTitle:       'Palácio Gyeongbokgung',
+            tourLocation:    'Seul',
+            description:     'O maior e mais majestoso dos cinco grandes palácios da dinastia Joseon. Explore mais de 600 anos de história e arquitetura real coreana.',
+            trigramVideo:    'img/gwae/trigramas/terra.webm',
+            backgroundImage: 'img/gwae/backgrounds/terra.jpg',
+            overlayTint:     'rgba(0, 0, 0, 0.08)',
+            galleryImages:   ['img/tours/PalacioGyeongbokgung.jpg', 'img/tours/BukchonHanokVillage.jpg'],
+            ctaHref:         '#newsletter',
+            ctaLabel:        'AGENDE SUA VIAGEM',
+        },
+        // 1 — ÁGUA
+        {
+            elementKey:      'agua',
+            elementLabel:    'ÁGUA',
+            elementTitle:    'Fluxo e Serenidade',
+            tourTitle:       'Ilha de Jeju',
+            tourLocation:    'Jeju',
+            description:     'Patrimônio Natural da UNESCO. Vulcões, praias, cachoeiras e uma cultura única. A ilha paradisíaca da Coreia do Sul que encanta todos os sentidos.',
+            trigramVideo:    'img/gwae/trigramas/agua.webm',
+            backgroundImage: 'img/gwae/backgrounds/agua.jpg',
+            overlayTint:     'rgba(0, 0, 0, 0.08)',
+            galleryImages:   ['img/tours/IlhaDeJeju.jpg', 'img/tours/ParqueNacionalDeSeoraksan.jpg'],
+            ctaHref:         '#newsletter',
+            ctaLabel:        'AGENDE SUA VIAGEM',
+        },
+        // 2 — FOGO
+        {
+            elementKey:      'fogo',
+            elementLabel:    'FOGO',
+            elementTitle:    'Energia e Intensidade',
+            tourTitle:       'Myeongdong',
+            tourLocation:    'Seul',
+            description:     'O distrito de compras mais vibrante de Seul. K-beauty, street food irresistível e uma energia contagiante a cada esquina.',
+            trigramVideo:    'img/gwae/trigramas/fogo.webm',
+            backgroundImage: 'img/gwae/backgrounds/fogo.jpg',
+            overlayTint:     'rgba(0, 0, 0, 0.08)',
+            galleryImages:   ['img/tours/Myeongdong.jpg', 'img/tours/Insadong.jpg'],
+            ctaHref:         '#newsletter',
+            ctaLabel:        'AGENDE SUA VIAGEM',
+        },
+        // 3 — CÉU
+        {
+            elementKey:      'ceu',
+            elementLabel:    'CÉU',
+            elementTitle:    'Altitude e Contemplação',
+            tourTitle:       'Namsan Seoul Tower',
+            tourLocation:    'Seul',
+            description:     'Suba ao topo da icônica torre de Seul e contemple uma vista panorâmica de 360° da capital sul-coreana. Um ponto imperdível ao pôr do sol.',
+            trigramVideo:    'img/gwae/trigramas/ceu.webm',
+            backgroundImage: 'img/gwae/backgrounds/ceu.jpg',
+            overlayTint:     'rgba(0, 0, 0, 0.08)',
+            galleryImages:   ['img/tours/NamsanSeoulTower.jpg', 'img/tours/DongdaemunDesignPlaza.jpg'],
+            ctaHref:         '#newsletter',
+            ctaLabel:        'AGENDE SUA VIAGEM',
+        },
+        // 4 — TERRA
+        {
+            elementKey:      'terra',
+            elementLabel:    'TERRA',
+            elementTitle:    'Raízes e Tradição',
+            tourTitle:       'Bukchon Hanok Village',
+            tourLocation:    'Seul',
+            description:     'Caminhe pelas ruelas centenárias repletas de casas tradicionais coreanas. Um recanto de tranquilidade entre os palácios e a modernidade de Seul.',
+            trigramVideo:    'img/gwae/trigramas/terra.webm',
+            backgroundImage: 'img/gwae/backgrounds/terra.jpg',
+            overlayTint:     'rgba(0, 0, 0, 0.08)',
+            galleryImages:   ['img/tours/BukchonHanokVillage.jpg', 'img/tours/PalacioGyeongbokgung.jpg'],
+            ctaHref:         '#newsletter',
+            ctaLabel:        'AGENDE SUA VIAGEM',
+        },
+        // 5 — ÁGUA
+        {
+            elementKey:      'agua',
+            elementLabel:    'ÁGUA',
+            elementTitle:    'Fluxo e Serenidade',
+            tourTitle:       'Parque Nacional de Seoraksan',
+            tourLocation:    'Sokcho',
+            description:     'Trilhas deslumbrantes entre picos rochosos, templos budistas e paisagens que mudam a cada estação. A natureza coreana em seu estado mais puro.',
+            trigramVideo:    'img/gwae/trigramas/agua.webm',
+            backgroundImage: 'img/gwae/backgrounds/agua.jpg',
+            overlayTint:     'rgba(0, 0, 0, 0.08)',
+            galleryImages:   ['img/tours/ParqueNacionalDeSeoraksan.jpg', 'img/tours/IlhaDeJeju.jpg'],
+            ctaHref:         '#newsletter',
+            ctaLabel:        'AGENDE SUA VIAGEM',
+        },
+        // 6 — FOGO
+        {
+            elementKey:      'fogo',
+            elementLabel:    'FOGO',
+            elementTitle:    'Energia e Intensidade',
+            tourTitle:       'Insadong',
+            tourLocation:    'Seul',
+            description:     'O coração cultural de Seul. Galerias de arte, casas de chá tradicionais, artesanato e uma atmosfera que mistura o antigo e o moderno.',
+            trigramVideo:    'img/gwae/trigramas/fogo.webm',
+            backgroundImage: 'img/gwae/backgrounds/fogo.jpg',
+            overlayTint:     'rgba(0, 0, 0, 0.08)',
+            galleryImages:   ['img/tours/Insadong.jpg', 'img/tours/Myeongdong.jpg'],
+            ctaHref:         '#newsletter',
+            ctaLabel:        'AGENDE SUA VIAGEM',
+        },
+        // 7 — CÉU
+        {
+            elementKey:      'ceu',
+            elementLabel:    'CÉU',
+            elementTitle:    'Altitude e Contemplação',
+            tourTitle:       'Dongdaemun Design Plaza',
+            tourLocation:    'Seul',
+            description:     'Um marco da arquitetura futurista projetado por Zaha Hadid. Design, moda, tecnologia e cultura convergem neste espaço icônico de Seul.',
+            trigramVideo:    'img/gwae/trigramas/ceu.webm',
+            backgroundImage: 'img/gwae/backgrounds/ceu.jpg',
+            overlayTint:     'rgba(0, 0, 0, 0.08)',
+            galleryImages:   ['img/tours/DongdaemunDesignPlaza.jpg', 'img/tours/NamsanSeoulTower.jpg'],
+            ctaHref:         '#newsletter',
+            ctaLabel:        'AGENDE SUA VIAGEM',
+        },
+    ];
+
+    const tourCarouselSlidesEl = document.getElementById('tourCarouselSlides');
+    const tourCarouselDotsEl   = document.getElementById('tourCarouselDots');
+    let tourCarouselIndex      = 0;
+    let tourCarouselTimer;
+    let tourCarouselImages     = [];
+
+    function showTourCarouselSlide(i) {
+        if (!tourCarouselSlidesEl) return;
+        tourCarouselIndex = ((i % tourCarouselImages.length) + tourCarouselImages.length) % tourCarouselImages.length;
+        tourCarouselSlidesEl.querySelectorAll('.tour-carousel-slide').forEach((s, idx) =>
+            s.classList.toggle('active', idx === tourCarouselIndex));
+        tourCarouselDotsEl?.querySelectorAll('.tour-carousel-dot').forEach((d, idx) =>
+            d.classList.toggle('active', idx === tourCarouselIndex));
+    }
+
+    function startTourCarouselTimer() {
+        clearInterval(tourCarouselTimer);
+        tourCarouselTimer = setInterval(() => showTourCarouselSlide(tourCarouselIndex + 1), 3500);
+    }
+
+    function loadTourCarousel(tourIndex) {
+        if (!tourCarouselSlidesEl) return;
+        clearInterval(tourCarouselTimer);
+        const data = toursData[tourIndex];
+        tourCarouselImages = (data && data.galleryImages) ? data.galleryImages : [];
+        tourCarouselIndex  = 0;
+
+        // Build image slides
+        tourCarouselSlidesEl.innerHTML = '';
+        tourCarouselImages.forEach((src, i) => {
+            const slide = document.createElement('div');
+            slide.className = 'tour-carousel-slide' + (i === 0 ? ' active' : '');
+            slide.style.backgroundImage = `url('${src}')`;
+            tourCarouselSlidesEl.appendChild(slide);
+        });
+
+        // Build dots
+        if (tourCarouselDotsEl) {
+            tourCarouselDotsEl.innerHTML = '';
+            tourCarouselImages.forEach((_, i) => {
+                const dot = document.createElement('button');
+                dot.className = 'tour-carousel-dot' + (i === 0 ? ' active' : '');
+                dot.setAttribute('aria-label', `Imagem ${i + 1}`);
+                dot.addEventListener('click', () => {
+                    showTourCarouselSlide(i);
+                    startTourCarouselTimer();
+                });
+                tourCarouselDotsEl.appendChild(dot);
+            });
+        }
+
+        startTourCarouselTimer();
+    }
+
+    // Prev/next buttons for the internal tour carousel
+    const tourCarouselPrevBtn = document.getElementById('tourCarouselPrev');
+    const tourCarouselNextBtn = document.getElementById('tourCarouselNext');
+    if (tourCarouselPrevBtn) {
+        tourCarouselPrevBtn.addEventListener('click', () => {
+            showTourCarouselSlide(tourCarouselIndex - 1);
+            startTourCarouselTimer();
+        });
+    }
+    if (tourCarouselNextBtn) {
+        tourCarouselNextBtn.addEventListener('click', () => {
+            showTourCarouselSlide(tourCarouselIndex + 1);
+            startTourCarouselTimer();
+        });
+    }
 
     function showViagenSlide(index, instant = false) {
         const total = viagensSlideItems.length;
@@ -244,31 +446,47 @@ document.addEventListener('DOMContentLoaded', () => {
         index = ((index % total) + total) % total;
 
         const nextSlide = viagensSlideItems[index];
-        const bgImage = nextSlide.dataset.bg;
-        const overlayTint = nextSlide.dataset.overlay;
-        const imgMain = nextSlide.dataset.imgMain;
-        const imgSec = nextSlide.dataset.imgSec;
+        const data = toursData[index];
+
+        // Sync video src and text content from toursData (single source of truth)
+        if (data) {
+            const vid = nextSlide.querySelector('.trigram-video');
+            const src = nextSlide.querySelector('.trigram-video source');
+            if (vid && src && src.getAttribute('src') !== data.trigramVideo) {
+                src.setAttribute('src', data.trigramVideo);
+                vid.load();
+            }
+
+            // Update text content
+            const heading = nextSlide.querySelector('.viagens-heading');
+            if (heading) {
+                const eParts = data.elementTitle.split(' e ');
+                const titleLine1 = eParts[0] + ' e';
+                const titleLine2 = eParts.slice(1).join(' e ');
+                heading.innerHTML = `<span class="viagens-element-label">${data.elementLabel}:</span> ${titleLine1}<br><span class="gold-gradient">${titleLine2}</span>`;
+            }
+            const tourName = nextSlide.querySelector('.viagens-tour-name');
+            if (tourName) tourName.textContent = `${data.tourTitle} · ${data.tourLocation}`;
+            const desc = nextSlide.querySelector('.viagens-desc');
+            if (desc) desc.textContent = data.description;
+            const cta = nextSlide.querySelector('.viagens-cta');
+            if (cta) {
+                cta.href = data.ctaHref;
+                cta.innerHTML = `${data.ctaLabel} <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
+            }
+        }
 
         viagensSlideItems.forEach(s => s.classList.remove('active'));
         nextSlide.classList.add('active');
+        resetInactiveTrigramVideos(nextSlide);
+        playActiveTrigramVideo(nextSlide);
 
-        if (viagensSection && bgImage) {
-            viagensSection.style.setProperty('--viagens-bg-image', `url('${bgImage}')`);
+        if (viagensSection && data) {
+            viagensSection.style.setProperty('--viagens-bg-image', `url('${data.backgroundImage}')`);
+            viagensSection.style.setProperty('--viagens-overlay-tint', data.overlayTint);
         }
 
-        if (viagensSection && overlayTint) {
-            viagensSection.style.setProperty('--viagens-overlay-tint', overlayTint);
-        }
-
-        if (viagensImgMainInner && imgMain) {
-            viagensImgMainInner.classList.remove('fading');
-            viagensImgMainInner.style.backgroundImage = `url('${imgMain}')`;
-        }
-
-        if (viagensImgSecInner && imgSec) {
-            viagensImgSecInner.classList.remove('fading');
-            viagensImgSecInner.style.backgroundImage = `url('${imgSec}')`;
-        }
+        loadTourCarousel(index);
 
         if (viagensCounter) {
             const num = String(index + 1).padStart(2, '0');
@@ -298,86 +516,80 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ===== TRIGRAM VIDEO UTILITIES =====
+
+    function setupTrigramVideo(video, index) {
+        video.muted        = true;
+        video.defaultMuted = true;
+        video.playsInline  = true;
+        video.loop         = true;
+        video.autoplay     = true;
+        video.preload      = 'auto';
+
+        // Silent decode failure: video loads but renders no frames (codec issue)
+        video.addEventListener('loadedmetadata', () => {
+            if (video.videoWidth === 0 || video.videoHeight === 0) {
+                console.warn(`[trigram ${index}] aviso: loadedmetadata com dimensões 0×0 — possível problema de codec em: ${video.currentSrc}`);
+            }
+        }, { once: true });
+
+        // Only log real errors
+        video.addEventListener('error', () => {
+            const src = video.currentSrc || video.querySelector('source')?.getAttribute('src') || '?';
+            console.error(`[trigram ${index}] erro — src: "${src}" | code: ${video.error?.code} | msg: ${video.error?.message}`);
+        });
+
+        video.load();
+    }
+
+    function playActiveTrigramVideo(slide) {
+        const video = slide.querySelector('.trigram-video');
+        if (!video) return;
+
+        // Numeric constants: 0=NETWORK_EMPTY, 3=NETWORK_NO_SOURCE
+        if (video.networkState === 0 || video.networkState === 3) {
+            video.load();
+        }
+
+        const doPlay = () => {
+            video.play().catch(err => {
+                // AbortError is normal when load() interrupts a pending play — ignore
+                if (err.name !== 'AbortError') {
+                    console.warn('[trigram] play() bloqueado:', err.name, err.message);
+                }
+            });
+        };
+
+        if (video.readyState >= 2) {
+            doPlay();
+        } else {
+            // Guard against missed canplay: poll readyState as fallback
+            let fired = false;
+            const onReady = () => { if (!fired) { fired = true; doPlay(); } };
+            video.addEventListener('canplay', onReady, { once: true });
+            // Fallback: if canplay already fired and readyState is now ready, play directly
+            setTimeout(() => {
+                if (!fired && video.readyState >= 2) { fired = true; doPlay(); }
+            }, 200);
+        }
+    }
+
+    function resetInactiveTrigramVideos(activeSlide) {
+        document.querySelectorAll('.viagens-slide').forEach(slide => {
+            if (slide === activeSlide) return;
+            const video = slide.querySelector('.trigram-video');
+            if (!video) return;
+            video.pause();
+            video.currentTime = 0;
+        });
+    }
+
+    // Setup all trigram videos at init — MUST run before showViagenSlide
+    document.querySelectorAll('.trigram-video').forEach((v, i) => setupTrigramVideo(v, i));
+
     if (viagensSlideItems.length > 0) {
         showViagenSlide(currentViagens, true);
         startViagensTimer();
-    }
-
-    // ===== DESTINOS FULLSCREEN CAROUSEL =====
-    const destinosSlides = document.querySelectorAll('.destinos-carousel-slide');
-    const destinosPrevBtn = document.getElementById('destinosPrev');
-    const destinosNextBtn = document.getElementById('destinosNext');
-    const destinosDots = document.getElementById('destinosDots');
-    let currentDestino = 0;
-    let destinosInterval;
-
-    // Create dots
-    if (destinosSlides.length > 0 && destinosDots) {
-        destinosSlides.forEach((_, i) => {
-            const dot = document.createElement('span');
-            dot.className = `destinos-carousel-dot ${i === 0 ? 'active' : ''}`;
-            dot.addEventListener('click', () => {
-                showDestino(i);
-                restartDestinosTimer();
-            });
-            destinosDots.appendChild(dot);
-        });
-    }
-
-    function showDestino(index) {
-        const total = destinosSlides.length;
-        if (total === 0) return;
-        index = ((index % total) + total) % total;
-
-        destinosSlides.forEach(s => s.classList.remove('active'));
-        destinosSlides[index].classList.add('active');
-        currentDestino = index;
-
-        document.querySelectorAll('.destinos-carousel-dot').forEach((d, i) => {
-            d.classList.toggle('active', i === index);
-        });
-    }
-
-    function restartDestinosTimer() {
-        clearInterval(destinosInterval);
-        destinosInterval = setInterval(() => {
-            showDestino(currentDestino + 1);
-        }, 7500);
-    }
-
-    if (destinosPrevBtn) {
-        destinosPrevBtn.addEventListener('click', () => {
-            showDestino(currentDestino - 1);
-            restartDestinosTimer();
-        });
-    }
-
-    if (destinosNextBtn) {
-        destinosNextBtn.addEventListener('click', () => {
-            showDestino(currentDestino + 1);
-            restartDestinosTimer();
-        });
-    }
-
-    if (destinosSlides.length > 0) {
-        restartDestinosTimer();
-    }
-
-    // Touch swipe for destinos carousel
-    const destinosSection = document.getElementById('destinos');
-    if (destinosSection) {
-        let dTouchStartX = 0;
-        destinosSection.addEventListener('touchstart', (e) => {
-            dTouchStartX = e.touches[0].clientX;
-        }, { passive: true });
-
-        destinosSection.addEventListener('touchend', (e) => {
-            const delta = dTouchStartX - e.changedTouches[0].clientX;
-            if (Math.abs(delta) < 50) return;
-            if (delta > 0) showDestino(currentDestino + 1);
-            else showDestino(currentDestino - 1);
-            restartDestinosTimer();
-        }, { passive: true });
     }
 
     // ===== FAB ANIMATION =====
@@ -416,21 +628,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ===== PAUSE CAROUSELS WHEN NOT VISIBLE =====
-    const destinosCarouselSection = document.getElementById('destinos');
-    if (destinosCarouselSection && destinosSlides.length > 0) {
-        const destinosVisibilityObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    restartDestinosTimer();
-                } else {
-                    clearInterval(destinosInterval);
-                }
-            });
-        }, { threshold: 0.1 });
-        destinosVisibilityObserver.observe(destinosCarouselSection);
-    }
-
-    const viagensCarouselSection = document.getElementById('viagens');
+    const viagensCarouselSection = document.getElementById('destinos');
     if (viagensCarouselSection && viagensSlideItems.length > 0) {
         const viagensVisibilityObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
