@@ -453,7 +453,7 @@ input {
     content: '';
     position: absolute;
     inset: 0;
-    background-image: var(--viagens-bg-image, url('img/gwae/backgrounds/ceu.jpg'));
+    background-image: var(--viagens-bg-image, url('img/gwae/backgrounds/ceu.webp'));
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
