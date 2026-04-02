@@ -259,7 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
             trigramVideo:    'img/gwae/trigramas/terra.webm',
             backgroundImage: 'img/gwae/backgrounds/terra.webp',
             overlayTint:     'rgba(0, 0, 0, 0.08)',
-            galleryImages:   ['img/tours/PalacioGyeongbokgung.webp', 'img/tours/BukchonHanokVillage.webp'],
+            galleryKey:      'PalacioGyeongbokgung',
             ctaHref:         '#newsletter',
             ctaLabel:        'AGENDE SUA VIAGEM',
         },
@@ -274,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
             trigramVideo:    'img/gwae/trigramas/agua.webm',
             backgroundImage: 'img/gwae/backgrounds/agua.webp',
             overlayTint:     'rgba(0, 0, 0, 0.08)',
-            galleryImages:   ['img/tours/IlhaDeJeju.webp', 'img/tours/ParqueNacionalDeSeoraksan.webp'],
+            galleryKey:      'IlhaDeJeju',
             ctaHref:         '#newsletter',
             ctaLabel:        'AGENDE SUA VIAGEM',
         },
@@ -289,7 +289,7 @@ document.addEventListener('DOMContentLoaded', () => {
             trigramVideo:    'img/gwae/trigramas/fogo.webm',
             backgroundImage: 'img/gwae/backgrounds/fogo.webp',
             overlayTint:     'rgba(0, 0, 0, 0.08)',
-            galleryImages:   ['img/tours/Myeongdong.webp', 'img/tours/Insadong.webp'],
+            galleryKey:      'Myeongdong',
             ctaHref:         '#newsletter',
             ctaLabel:        'AGENDE SUA VIAGEM',
         },
@@ -304,7 +304,7 @@ document.addEventListener('DOMContentLoaded', () => {
             trigramVideo:    'img/gwae/trigramas/ceu.webm',
             backgroundImage: 'img/gwae/backgrounds/ceu.webp',
             overlayTint:     'rgba(0, 0, 0, 0.08)',
-            galleryImages:   ['img/tours/NamsanSeoulTower.webp', 'img/tours/DongdaemunDesignPlaza.webp'],
+            galleryKey:      'NamsanSeoulTower',
             ctaHref:         '#newsletter',
             ctaLabel:        'AGENDE SUA VIAGEM',
         },
@@ -319,7 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
             trigramVideo:    'img/gwae/trigramas/terra.webm',
             backgroundImage: 'img/gwae/backgrounds/terra.webp',
             overlayTint:     'rgba(0, 0, 0, 0.08)',
-            galleryImages:   ['img/tours/BukchonHanokVillage.webp', 'img/tours/PalacioGyeongbokgung.webp'],
+            galleryKey:      'BukchonHanokVillage',
             ctaHref:         '#newsletter',
             ctaLabel:        'AGENDE SUA VIAGEM',
         },
@@ -334,7 +334,7 @@ document.addEventListener('DOMContentLoaded', () => {
             trigramVideo:    'img/gwae/trigramas/agua.webm',
             backgroundImage: 'img/gwae/backgrounds/agua.webp',
             overlayTint:     'rgba(0, 0, 0, 0.08)',
-            galleryImages:   ['img/tours/ParqueNacionalDeSeoraksan.webp', 'img/tours/IlhaDeJeju.webp'],
+            galleryKey:      'ParqueNacionalDeSeoraksan',
             ctaHref:         '#newsletter',
             ctaLabel:        'AGENDE SUA VIAGEM',
         },
@@ -349,7 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
             trigramVideo:    'img/gwae/trigramas/fogo.webm',
             backgroundImage: 'img/gwae/backgrounds/fogo.webp',
             overlayTint:     'rgba(0, 0, 0, 0.08)',
-            galleryImages:   ['img/tours/Insadong.webp', 'img/tours/Myeongdong.webp'],
+            galleryKey:      'Insadong',
             ctaHref:         '#newsletter',
             ctaLabel:        'AGENDE SUA VIAGEM',
         },
@@ -364,7 +364,7 @@ document.addEventListener('DOMContentLoaded', () => {
             trigramVideo:    'img/gwae/trigramas/ceu.webm',
             backgroundImage: 'img/gwae/backgrounds/ceu.webp',
             overlayTint:     'rgba(0, 0, 0, 0.08)',
-            galleryImages:   ['img/tours/DongdaemunDesignPlaza.webp', 'img/tours/NamsanSeoulTower.webp'],
+            galleryKey:      'DongdaemunDesignPlaza',
             ctaHref:         '#newsletter',
             ctaLabel:        'AGENDE SUA VIAGEM',
         },
@@ -375,6 +375,33 @@ document.addEventListener('DOMContentLoaded', () => {
     let tourCarouselIndex      = 0;
     let tourCarouselTimer;
     let tourCarouselImages     = [];
+
+    // Cache de imagens descobertas por galleryKey para não repetir requests
+    const galleryCache = {};
+
+    // Descobre dinamicamente quantas imagens existem para um tour
+    // Tenta Key1.webp, Key2.webp, ... até receber 404
+    async function discoverGalleryImages(key) {
+        if (galleryCache[key]) return galleryCache[key];
+        const images = [];
+        let i = 1;
+        while (true) {
+            const url = `img/tours/${key}${i}.webp`;
+            try {
+                const res = await fetch(url, { method: 'HEAD' });
+                if (res.ok) {
+                    images.push(url);
+                    i++;
+                } else {
+                    break;
+                }
+            } catch {
+                break;
+            }
+        }
+        galleryCache[key] = images;
+        return images;
+    }
 
     function showTourCarouselSlide(i) {
         if (!tourCarouselSlidesEl) return;
@@ -390,11 +417,8 @@ document.addEventListener('DOMContentLoaded', () => {
         tourCarouselTimer = setInterval(() => showTourCarouselSlide(tourCarouselIndex + 1), 3500);
     }
 
-    function loadTourCarousel(tourIndex) {
-        if (!tourCarouselSlidesEl) return;
-        clearInterval(tourCarouselTimer);
-        const data = toursData[tourIndex];
-        tourCarouselImages = (data && data.galleryImages) ? data.galleryImages : [];
+    function buildCarouselUI(images) {
+        tourCarouselImages = images;
         tourCarouselIndex  = 0;
 
         // Build image slides
@@ -422,6 +446,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         startTourCarouselTimer();
+    }
+
+    async function loadTourCarousel(tourIndex) {
+        if (!tourCarouselSlidesEl) return;
+        clearInterval(tourCarouselTimer);
+        const data = toursData[tourIndex];
+        if (!data || !data.galleryKey) return;
+
+        const images = await discoverGalleryImages(data.galleryKey);
+        buildCarouselUI(images);
     }
 
     // Prev/next buttons for the internal tour carousel
@@ -499,7 +533,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function startViagensTimer() {
         clearInterval(viagensTimer);
-        viagensTimer = setInterval(() => showViagenSlide(currentViagens + 1), 6000);
+        viagensTimer = setInterval(() => showViagenSlide(currentViagens + 1), 13500);
     }
 
     if (viagensPrevBtn) {
