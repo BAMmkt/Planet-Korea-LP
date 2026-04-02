@@ -621,6 +621,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Setup all trigram videos at init — MUST run before showViagenSlide
     document.querySelectorAll('.trigram-video').forEach((v, i) => setupTrigramVideo(v, i));
 
+    // Preload: descobre e carrega todas as imagens dos tours em background
+    (async function preloadAllTourImages() {
+        for (const tour of toursData) {
+            if (!tour.galleryKey) continue;
+            const imgs = await discoverGalleryImages(tour.galleryKey);
+            imgs.forEach(src => { new Image().src = src; });
+        }
+    })();
+
     if (viagensSlideItems.length > 0) {
         showViagenSlide(currentViagens, true);
         startViagensTimer();
