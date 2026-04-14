@@ -686,24 +686,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ===== PARALLAX EFFECT ON BACKGROUNDS =====
-    window.addEventListener('scroll', () => {
-        const sections = document.querySelectorAll('.section');
-
-        sections.forEach(section => {
-            // Skip destinos carousel — its bg elements have Ken Burns scale()
-            // that conflicts with translateY causing flicker
-            if (section.id === 'destinos') return;
-
-            const bg = section.querySelector('[class$="-bg"]');
-            if (bg) {
-                const rect = section.getBoundingClientRect();
-                if (rect.top < window.innerHeight && rect.bottom > 0) {
-                    const offset = (rect.top / window.innerHeight) * 30;
-                    bg.style.transform = `translateY(${offset}px)`;
-                }
-            }
-        });
-    });
+    // Disabled: translateY on -bg elements caused visible black gaps
+    // between sections that grew/shrank during scroll.
 
     // ===== NEWSLETTER FORM =====
     const newsletterForm = document.getElementById('newsletterForm');
