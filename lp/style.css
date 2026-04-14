@@ -683,8 +683,8 @@ input {
 /* ===== TOUR CAROUSEL (right column) ===== */
 .tour-carousel {
     position: relative;
-    width: 78%;
-    aspect-ratio: 4 / 3;
+    width: 92%;
+    aspect-ratio: 3 / 2.8;
     overflow: hidden;
     border-radius: 20px;
     flex-shrink: 0;
@@ -767,6 +767,85 @@ input {
 .tour-carousel-next:hover {
     background: rgba(0, 0, 0, 0.68);
     border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* -- Tour Info Overlay -- */
+.tour-carousel-info-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.82);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+    padding: 36px 32px 24px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.tour-carousel-info-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.tour-info-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 11;
+    transition: background 0.25s ease;
+}
+
+.tour-info-close:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.tour-info-content {
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 15px;
+    line-height: 1.7;
+    font-weight: 400;
+}
+
+.tour-info-content p {
+    margin: 0 0 14px;
+}
+
+.tour-info-tip {
+    margin-top: 8px;
+    padding: 14px 16px;
+    background: rgba(200, 140, 110, 0.15);
+    border-left: 3px solid var(--primary);
+    border-radius: 6px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.tour-info-tip strong {
+    color: var(--primary);
+    display: block;
+    margin-bottom: 4px;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.viagens-saiba-mais {
+    font-size: 12px;
+    padding: 10px 22px;
+    cursor: pointer;
 }
 
 /* ===== TRAJETÓRIA ===== */
