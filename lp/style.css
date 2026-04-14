@@ -352,10 +352,14 @@ input {
 
 #heroVideo {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 50%;
+    left: 50%;
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
 }
 
 .hero-video-container iframe {
@@ -450,9 +454,7 @@ input {
     display: flex;
     flex-direction: column;
     padding: 0;
-    height: 100vh;
-    max-height: 100vh;
-    overflow: hidden;
+    min-height: 100vh;
     position: relative;
     isolation: isolate;
 }
@@ -675,7 +677,7 @@ input {
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    overflow: visible;
     background: transparent;
     padding: 40px 40px 40px 20px;
 }
@@ -685,6 +687,7 @@ input {
     position: relative;
     width: 92%;
     aspect-ratio: 3 / 2.8;
+    max-height: calc(100vh - 180px);
     overflow: hidden;
     border-radius: 20px;
     flex-shrink: 0;
