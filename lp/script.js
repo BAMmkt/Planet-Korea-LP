@@ -510,10 +510,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (tourName) tourName.textContent = `${data.tourTitle} · ${data.tourLocation}`;
             const desc = nextSlide.querySelector('.viagens-desc');
             if (desc) {
-                desc.innerHTML = '';
+                desc.textContent = data.description;
                 const saibaMaisBtn = document.createElement('button');
-                saibaMaisBtn.className = 'btn-pill viagens-saiba-mais';
-                saibaMaisBtn.innerHTML = `SAIBA MAIS <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
+                saibaMaisBtn.className = 'viagens-saiba-mais';
+                saibaMaisBtn.textContent = 'Saiba mais';
                 saibaMaisBtn.addEventListener('click', () => toggleTourInfo(index));
                 desc.appendChild(saibaMaisBtn);
             }
