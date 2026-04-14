@@ -1,53 +1,3 @@
-// ===== HERO VIDEO — YouTube clip loop (4:20–5:20) =====
-(function () {
-    const HERO_VIDEO_ID = 'AA-sv3ilNBE';
-    const HERO_START = 260; // 4:20
-    const HERO_END   = 320; // 5:20
-    let heroPlayer;
-
-    window.onYouTubeIframeAPIReady = function () {
-        heroPlayer = new YT.Player('heroVideo', {
-            width: '100%',
-            height: '100%',
-            videoId: HERO_VIDEO_ID,
-            playerVars: {
-                autoplay: 1,
-                mute: 1,
-                controls: 0,
-                showinfo: 0,
-                modestbranding: 1,
-                rel: 0,
-                disablekb: 1,
-                iv_load_policy: 3,
-                playsinline: 1,
-                start: HERO_START,
-            },
-            events: {
-                onReady: function (e) {
-                    e.target.mute();
-                    e.target.playVideo();
-                    setInterval(function () {
-                        if (!heroPlayer || typeof heroPlayer.getCurrentTime !== 'function') return;
-                        if (heroPlayer.getCurrentTime() >= HERO_END) {
-                            heroPlayer.seekTo(HERO_START, true);
-                        }
-                    }, 500);
-                },
-                onStateChange: function (e) {
-                    if (e.data === YT.PlayerState.ENDED) {
-                        heroPlayer.seekTo(HERO_START, true);
-                        heroPlayer.playVideo();
-                    }
-                }
-            }
-        });
-    };
-
-    const tag = document.createElement('script');
-    tag.src = 'https://www.youtube.com/iframe_api';
-    document.head.appendChild(tag);
-}());
-
 document.addEventListener('DOMContentLoaded', () => {
     // ===== HERO SLIDER =====
 
@@ -256,6 +206,8 @@ document.addEventListener('DOMContentLoaded', () => {
             tourTitle:       'Palácio Gyeongbokgung',
             tourLocation:    'Seul',
             description:     'O maior e mais majestoso dos cinco grandes palácios da dinastia Joseon. Explore mais de 600 anos de história e arquitetura real coreana.',
+            longDescription: 'Construído em 1395, durante a Dinastia Joseon, o Palácio Gyeongbokgung é o mais grandioso e emblemático entre os cinco palácios reais de Seul. Seu nome significa "Palácio Grandemente Abençoado pela Felicidade" — um reflexo da importância espiritual e cultural que o local mantém até hoje.\n\nCom seus pavilhões elegantes, jardins, lagos e a icônica cerimônia da troca da guarda real, o palácio oferece uma imersão completa na história coreana. É um dos lugares mais fotogênicos da cidade, especialmente para quem veste o tradicional hanbok.\n\nA Planet Korea proporciona visitas guiadas com explicações sobre cada detalhe histórico, além de assistência em português para que você viva essa jornada com conforto e significado.',
+            tip:             'Alugue um hanbok e explore o palácio — o traje garante entrada gratuita e rende fotos incríveis!',
             trigramVideo:    'img/gwae/trigramas/terra.webm',
             backgroundImage: 'img/gwae/backgrounds/terra.webp',
             overlayTint:     'rgba(0, 0, 0, 0.08)',
@@ -271,6 +223,8 @@ document.addEventListener('DOMContentLoaded', () => {
             tourTitle:       'Ilha de Jeju',
             tourLocation:    'Jeju',
             description:     'Patrimônio Natural da UNESCO. Vulcões, praias, cachoeiras e uma cultura única. A ilha paradisíaca da Coreia do Sul que encanta todos os sentidos.',
+            longDescription: 'Conhecida como o "Havaí da Coreia", a Ilha de Jeju é um refúgio natural e um dos destinos mais encantadores do país. Reconhecida pela UNESCO como Patrimônio Natural da Humanidade, Jeju combina praias de águas cristalinas, trilhas vulcânicas, cachoeiras e campos de flores que mudam a paisagem a cada estação.\n\nAlém da beleza natural, a ilha também é rica em cultura e tradição: das haenyeo — as mergulhadoras coreanas — aos templos escondidos entre montanhas, cada canto de Jeju guarda histórias fascinantes.\n\nA Planet Korea organiza roteiros personalizados para explorar o melhor da ilha com conforto, segurança e suporte em português.',
+            tip:             'Suba o Monte Hallasan ao amanhecer ou visite a praia de Hyeopjae no pôr do sol — duas das vistas mais lindas da Coreia!',
             trigramVideo:    'img/gwae/trigramas/agua.webm',
             backgroundImage: 'img/gwae/backgrounds/agua.webp',
             overlayTint:     'rgba(0, 0, 0, 0.08)',
@@ -286,6 +240,8 @@ document.addEventListener('DOMContentLoaded', () => {
             tourTitle:       'Myeongdong',
             tourLocation:    'Seul',
             description:     'O distrito de compras mais vibrante de Seul. K-beauty, street food irresistível e uma energia contagiante a cada esquina.',
+            longDescription: 'Um dos bairros mais animados de Seul, Myeongdong é o paraíso das compras e da gastronomia de rua coreana. Entre letreiros coloridos e ruas cheias de vida, você encontrará desde as maiores marcas de cosméticos e moda até pequenas lojas locais com produtos únicos.\n\nÀ noite, o bairro ganha um charme especial com suas barraquinhas de street food — onde é possível provar delícias como tteokbokki, hotteok e frango coreano. A Planet Korea oferece roteiros personalizados que incluem paradas estratégicas para compras e experiências gastronômicas, com acompanhamento em português para que você aproveite cada detalhe com tranquilidade.',
+            tip:             'Visite Myeongdong ao entardecer — é quando o bairro fica ainda mais vibrante, com luzes, aromas e sons que traduzem o espírito moderno de Seul.',
             trigramVideo:    'img/gwae/trigramas/fogo.webm',
             backgroundImage: 'img/gwae/backgrounds/fogo.webp',
             overlayTint:     'rgba(0, 0, 0, 0.08)',
@@ -301,6 +257,8 @@ document.addEventListener('DOMContentLoaded', () => {
             tourTitle:       'Namsan Seoul Tower',
             tourLocation:    'Seul',
             description:     'Suba ao topo da icônica torre de Seul e contemple uma vista panorâmica de 360° da capital sul-coreana. Um ponto imperdível ao pôr do sol.',
+            longDescription: 'Localizada no coração da capital, a Namsan Seoul Tower é um dos cartões-postais mais famosos da Coreia do Sul. Erguida no topo da montanha Namsan, oferece uma vista panorâmica deslumbrante de toda a cidade de Seul — especialmente ao entardecer, quando o horizonte se ilumina.\n\nO local é conhecido também pelos famosos "cadeados do amor", símbolo de união entre casais do mundo todo. Além do mirante, a torre abriga restaurantes, cafés e uma área de observação interativa com tecnologia digital.\n\nA Planet Korea organiza visitas com horários estratégicos para que você vivencie o pôr do sol mais bonito da cidade, com conforto e suporte em português.',
+            tip:             'Leve um cadeado personalizado e registre seu amor com a vista mais romântica de Seul!',
             trigramVideo:    'img/gwae/trigramas/ceu.webm',
             backgroundImage: 'img/gwae/backgrounds/ceu.webp',
             overlayTint:     'rgba(0, 0, 0, 0.08)',
@@ -316,6 +274,8 @@ document.addEventListener('DOMContentLoaded', () => {
             tourTitle:       'Bukchon Hanok Village',
             tourLocation:    'Seul',
             description:     'Caminhe pelas ruelas centenárias repletas de casas tradicionais coreanas. Um recanto de tranquilidade entre os palácios e a modernidade de Seul.',
+            longDescription: 'Localizado entre os palácios Gyeongbokgung e Changdeokgung, o Bukchon Hanok Village é uma das áreas mais encantadoras de Seul. Repleto de casas tradicionais coreanas — chamadas hanoks — o vilarejo preserva a arquitetura e a atmosfera do período da dinastia Joseon.\n\nCaminhar por suas ruelas é como voltar no tempo: cada detalhe revela o equilíbrio entre o antigo e o moderno, com oficinas de artesanato, museus e cafés charmosos. A Planet Korea organiza visitas guiadas que permitem explorar o vilarejo com contexto histórico, segurança e suporte em português.',
+            tip:             'Vista o hanbok tradicional e registre fotos inesquecíveis nas vielas mais fotogênicas da cidade!',
             trigramVideo:    'img/gwae/trigramas/terra.webm',
             backgroundImage: 'img/gwae/backgrounds/terra.webp',
             overlayTint:     'rgba(0, 0, 0, 0.08)',
@@ -331,6 +291,8 @@ document.addEventListener('DOMContentLoaded', () => {
             tourTitle:       'Parque Nacional de Seoraksan',
             tourLocation:    'Sokcho',
             description:     'Trilhas deslumbrantes entre picos rochosos, templos budistas e paisagens que mudam a cada estação. A natureza coreana em seu estado mais puro.',
+            longDescription: 'Localizado na cidade costeira de Sokcho, o Parque Nacional de Seoraksan é um dos cenários mais espetaculares da Coreia do Sul. Conhecido por suas montanhas imponentes, florestas exuberantes e templos escondidos entre os vales, o parque é um verdadeiro refúgio para quem busca natureza e espiritualidade.\n\nDurante o outono, as montanhas se transformam em um espetáculo de cores vibrantes; no inverno, ganham um charme sereno com a neve que cobre os picos.\n\nA Planet Korea organiza passeios personalizados com trilhas adaptadas a diferentes níveis de dificuldade, garantindo segurança e uma experiência inesquecível, acompanhada por guias em português.',
+            tip:             'Combine o passeio com uma visita ao Templo Sinheungsa, dentro do parque — um dos templos budistas mais antigos do país.',
             trigramVideo:    'img/gwae/trigramas/agua.webm',
             backgroundImage: 'img/gwae/backgrounds/agua.webp',
             overlayTint:     'rgba(0, 0, 0, 0.08)',
@@ -346,6 +308,8 @@ document.addEventListener('DOMContentLoaded', () => {
             tourTitle:       'Insadong',
             tourLocation:    'Seul',
             description:     'O coração cultural de Seul. Galerias de arte, casas de chá tradicionais, artesanato e uma atmosfera que mistura o antigo e o moderno.',
+            longDescription: 'O bairro de Insadong é o coração artístico e cultural de Seul. Com suas vielas charmosas repletas de casas tradicionais (hanok), galerias, cafés e lojinhas, o local é um convite a desacelerar e mergulhar na essência da cultura coreana.\n\nPasseando por ali, você encontrará desde caligrafias e cerâmicas artesanais até o famoso street food coreano — tudo embalado pelo som suave da música tradicional que ecoa entre as ruas de paralelepípedo.\n\nInsadong é o ponto de encontro perfeito entre o antigo e o novo, onde tradição e criatividade convivem lado a lado.',
+            tip:             'Visite Insadong no final da tarde, quando as luzes das lanternas se acendem e o bairro ganha um clima ainda mais mágico!',
             trigramVideo:    'img/gwae/trigramas/fogo.webm',
             backgroundImage: 'img/gwae/backgrounds/fogo.webp',
             overlayTint:     'rgba(0, 0, 0, 0.08)',
@@ -361,6 +325,8 @@ document.addEventListener('DOMContentLoaded', () => {
             tourTitle:       'Dongdaemun Design Plaza',
             tourLocation:    'Seul',
             description:     'Um marco da arquitetura futurista projetado por Zaha Hadid. Design, moda, tecnologia e cultura convergem neste espaço icônico de Seul.',
+            longDescription: 'Inaugurado em 2014 e projetado pela renomada arquiteta Zaha Hadid, o Dongdaemun Design Plaza (DDP) é um verdadeiro ícone da modernidade coreana. Com curvas futuristas e iluminação impressionante, o DDP abriga exposições de arte, feiras de design, desfiles de moda e eventos culturais durante todo o ano.\n\nÀ noite, o edifício ganha vida com luzes coloridas e uma atmosfera vibrante que encanta visitantes de todo o mundo. A Planet Korea conduz visitas guiadas que exploram não apenas a arquitetura do local, mas também as histórias e inspirações por trás desse marco de Seul.',
+            tip:             'Visite o DDP à noite para ver o espetáculo de luzes e caminhar pelo distrito de compras de Dongdaemun!',
             trigramVideo:    'img/gwae/trigramas/ceu.webm',
             backgroundImage: 'img/gwae/backgrounds/ceu.webp',
             overlayTint:     'rgba(0, 0, 0, 0.08)',
@@ -458,6 +424,44 @@ document.addEventListener('DOMContentLoaded', () => {
         buildCarouselUI(images);
     }
 
+    // ===== TOUR INFO OVERLAY =====
+    const tourInfoOverlay = document.getElementById('tourInfoOverlay');
+    const tourInfoContent = document.getElementById('tourInfoContent');
+    const tourInfoCloseBtn = document.getElementById('tourInfoClose');
+
+    function toggleTourInfo(index) {
+        if (!tourInfoOverlay || !tourInfoContent) return;
+        const data = toursData[index];
+        if (!data) return;
+
+        // Build content
+        let html = '';
+        if (data.longDescription) {
+            const paragraphs = data.longDescription.split('\n').filter(p => p.trim());
+            paragraphs.forEach(p => { html += `<p>${p}</p>`; });
+        }
+        if (data.tip) {
+            html += `<div class="tour-info-tip"><strong>Dica Planet Korea</strong>${data.tip}</div>`;
+        }
+        tourInfoContent.innerHTML = html;
+
+        // Show overlay and pause both carousels
+        tourInfoOverlay.classList.add('active');
+        clearInterval(tourCarouselTimer);
+        clearInterval(viagensTimer);
+    }
+
+    function closeTourInfo() {
+        if (!tourInfoOverlay) return;
+        tourInfoOverlay.classList.remove('active');
+        startTourCarouselTimer();
+        startViagensTimer();
+    }
+
+    if (tourInfoCloseBtn) {
+        tourInfoCloseBtn.addEventListener('click', closeTourInfo);
+    }
+
     // Prev/next buttons for the internal tour carousel
     const tourCarouselPrevBtn = document.getElementById('tourCarouselPrev');
     const tourCarouselNextBtn = document.getElementById('tourCarouselNext');
@@ -478,6 +482,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const total = viagensSlideItems.length;
         if (total === 0) return;
         index = ((index % total) + total) % total;
+
+        // Close info overlay when switching slides
+        closeTourInfo();
 
         const nextSlide = viagensSlideItems[index];
         const data = toursData[index];
@@ -502,7 +509,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const tourName = nextSlide.querySelector('.viagens-tour-name');
             if (tourName) tourName.textContent = `${data.tourTitle} · ${data.tourLocation}`;
             const desc = nextSlide.querySelector('.viagens-desc');
-            if (desc) desc.textContent = data.description;
+            if (desc) {
+                desc.textContent = data.description;
+                const saibaMaisBtn = document.createElement('button');
+                saibaMaisBtn.className = 'viagens-saiba-mais';
+                saibaMaisBtn.textContent = 'Saiba mais';
+                saibaMaisBtn.addEventListener('click', () => toggleTourInfo(index));
+                desc.appendChild(saibaMaisBtn);
+            }
             const cta = nextSlide.querySelector('.viagens-cta');
             if (cta) {
                 cta.href = data.ctaHref;
@@ -686,24 +700,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ===== PARALLAX EFFECT ON BACKGROUNDS =====
-    window.addEventListener('scroll', () => {
-        const sections = document.querySelectorAll('.section');
-
-        sections.forEach(section => {
-            // Skip destinos carousel — its bg elements have Ken Burns scale()
-            // that conflicts with translateY causing flicker
-            if (section.id === 'destinos') return;
-
-            const bg = section.querySelector('[class$="-bg"]');
-            if (bg) {
-                const rect = section.getBoundingClientRect();
-                if (rect.top < window.innerHeight && rect.bottom > 0) {
-                    const offset = (rect.top / window.innerHeight) * 30;
-                    bg.style.transform = `translateY(${offset}px)`;
-                }
-            }
-        });
-    });
+    // Disabled: translateY on -bg elements caused visible black gaps
+    // between sections that grew/shrank during scroll.
 
     // ===== NEWSLETTER FORM =====
     const newsletterForm = document.getElementById('newsletterForm');

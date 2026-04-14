@@ -12,3 +12,6 @@ Thumbs.db
 # Firebase
 .firebase/
 .firebaserc.local
+
+# Video original 4K (muito grande para GitHub)
+lp/img/background/Hero.mp4
