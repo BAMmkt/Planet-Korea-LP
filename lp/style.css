@@ -685,8 +685,8 @@ input {
 /* ===== TOUR CAROUSEL (right column) ===== */
 .tour-carousel {
     position: relative;
-    width: 92%;
-    aspect-ratio: 3 / 2.8;
+    width: 75%;
+    aspect-ratio: 4 / 3;
     max-height: calc(100vh - 180px);
     overflow: hidden;
     border-radius: 20px;
